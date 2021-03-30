@@ -18,9 +18,9 @@ public class DriveSubsystem extends SubsystemBase {
   //private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
   public DriveSubsystem() {
-    System.out.println("DriveSubsystem Set Field Oriented");
+    // System.out.println("DriveSubsystem Set Field Oriented");
     swerve.setFieldOriented(true);
-    System.out.println("DriveSubsystem zeroAzimuth");
+    // System.out.println("DriveSubsystem zeroAzimuth");
     zeroAzimuths();
   }
 
@@ -43,7 +43,7 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void saveAzimuthPositions() {
-    System.out.println("DriveSubsystem Attempt to Save Azimuth Positions.");
+    // System.out.println("DriveSubsystem Attempt to Save Azimuth Positions.");
     swerve.saveAzimuthPositions();
   }
 

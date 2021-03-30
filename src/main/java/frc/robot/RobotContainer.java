@@ -51,7 +51,7 @@ public class RobotContainer {
       Shooter50Button = new JoystickButton(OPERATOR, Button.kY.value);
       Shooter50Button.whileHeld(new MoveShooter(.5));
 
-      // Shooter 10% Reverse
+      // Shooter 25% Reverse
       ShooterReverseButton = new JoystickButton(OPERATOR, Button.kX.value);
       ShooterReverseButton.whileHeld(new MoveShooter(-.25));
 
@@ -76,12 +76,12 @@ public class RobotContainer {
          .whenPressed(() -> DRIVE.zeroGyro());
 
       //Zero Azimuths Command
-      // new JoystickButton(CONTROLS, Button.kB.value)
-      //  .whenPressed(() -> DRIVE.zeroAzimuths());
+       new JoystickButton(CONTROLS, Button.kB.value)
+        .whenPressed(() -> DRIVE.zeroAzimuths());
       
       //Save Azimuth zeroes Command
-      // new JoystickButton(CONTROLS, Button.kX.value)
-      //   .whenPressed(() -> DRIVE.saveAzimuthPositions());
+      new JoystickButton(CONTROLS, Button.kX.value)
+        .whenPressed(() -> DRIVE.saveAzimuthPositions());
     }
   }
 }

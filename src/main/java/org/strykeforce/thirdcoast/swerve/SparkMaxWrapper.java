@@ -1,7 +1,6 @@
 package org.strykeforce.thirdcoast.swerve;
 
 import com.ctre.phoenix.sensors.CANCoder;
-import com.ctre.phoenix.sensors.SensorInitializationStrategy;
 import com.ctre.phoenix.sensors.SensorTimeBase;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;

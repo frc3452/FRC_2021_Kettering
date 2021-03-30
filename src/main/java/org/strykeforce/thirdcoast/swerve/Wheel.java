@@ -92,8 +92,8 @@ public class Wheel {
       azimuthError -= Math.copySign(0.5 * TICKS, azimuthError);
       drive = -drive;
     }
-    String SwerveAzimuthErrorLabel = "Azimuth Error " + i;
-    SmartDashboard.putNumber(SwerveAzimuthErrorLabel, azimuthError);
+    // String SwerveAzimuthErrorLabel = "Azimuth Error " + i;
+    // SmartDashboard.putNumber(SwerveAzimuthErrorLabel, azimuthError);
     azimuthTalon.set(azimuthPosition + azimuthError);
     driver.accept(drive);
   }
@@ -162,14 +162,14 @@ public class Wheel {
    * @param zero zero setpoint, absolute encoder position (in ticks) where wheel is zeroed.
    */
   public void setAzimuthZero(int zero) {
-    int m_absolute_position = getAzimuthAbsolutePosition();
-    if (zero == m_absolute_position) {
-      azimuthTalon.setSensorPosition(m_absolute_position);
-    } else {
+    // int m_absolute_position = getAzimuthAbsolutePosition();
+    //  if (zero == m_absolute_position) {
+    //  azimuthTalon.setSensorPosition(m_absolute_position);
+    //} else {
       int azimuthSetpoint = getAzimuthAbsolutePosition() - zero;
       azimuthTalon.setSensorPosition(azimuthSetpoint);
       azimuthTalon.set(azimuthSetpoint);
-    }
+    // }
   }
 
   /**

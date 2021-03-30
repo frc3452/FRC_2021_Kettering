@@ -17,9 +17,6 @@ public class ShooterSubsystem extends SubsystemBase {
 
         rightMotor.setInverted(true);
         leftMotor.setInverted(true);
-        //rightMotor.setInverted(true);
-
-        // rightMotor.follow(leftMotor);
     }
 
     public void Forward(double power) {

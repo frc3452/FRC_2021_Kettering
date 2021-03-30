@@ -103,10 +103,10 @@ public class SwerveDrive {
    */
   public void set(double azimuth, double drive) {
     for (Wheel wheel : wheels) {
-      System.out.print("SwerveDrive Set Azimuth ");
-      System.out.print(azimuth);
-      System.out.print(" Drive ");
-      System.out.println(drive);
+      // System.out.print("SwerveDrive Set Azimuth ");
+      // System.out.print(azimuth);
+      // System.out.print(" Drive ");
+      // System.out.println(drive);
       // SmartDashboard.putNumber("Drive Set", drive);
       // SmartDashboard.putNumber("Azimuth Set", azimuth);
       SmartDashboard.putNumber("CanCoder Position", wheels[0].getAzimuthAbsolutePosition());
@@ -165,12 +165,12 @@ public class SwerveDrive {
     // set wheels
     for (int i = 0; i < WHEEL_COUNT; i++) {
       wheels[i].set(wa[i], ws[i], i);
-      String SwerveAzimuthLabel  = "Swerve Azimuth " + i;
-      String SwerveDriveLabel = "Swerve Drive " + i;
-      String SwerveCanCoderLabel = "CanCoder Absolute Position " + i;
-      SmartDashboard.putNumber(SwerveAzimuthLabel, wa[i]);
-      SmartDashboard.putNumber(SwerveDriveLabel, ws[i]);
-      SmartDashboard.putNumber(SwerveCanCoderLabel, wheels[i].getAzimuthAbsolutePosition());
+      // String SwerveAzimuthLabel  = "Swerve Azimuth " + i;
+      // String SwerveDriveLabel = "Swerve Drive " + i;
+      // String SwerveCanCoderLabel = "CanCoder Absolute Position " + i;
+      // SmartDashboard.putNumber(SwerveAzimuthLabel, wa[i]);
+      // SmartDashboard.putNumber(SwerveDriveLabel, ws[i]);
+      // SmartDashboard.putNumber(SwerveCanCoderLabel, wheels[i].getAzimuthAbsolutePosition());
 
     }
   }
@@ -206,6 +206,7 @@ public class SwerveDrive {
     for (int i = 0; i < WHEEL_COUNT; i++) {
       int position = wheels[i].getAzimuthAbsolutePosition();
       prefs.putInt(getPreferenceKeyForWheel(i), position);
+      
       //logger.info("azimuth {}: saved zero = {}", i, position);
     }
   }
@@ -226,10 +227,10 @@ public class SwerveDrive {
     for (int i = 0; i < WHEEL_COUNT; i++) {
       int position = prefs.getInt(getPreferenceKeyForWheel(i), DEFAULT_ABSOLUTE_AZIMUTH_OFFSET);
       wheels[i].setAzimuthZero(position);
-      System.out.print("SwerveDrive ZeroAzimuth Encoder for ");
-      System.out.print(i);
-      System.out.print(" Position ");
-      System.out.println(position);
+      // System.out.print("SwerveDrive ZeroAzimuth Encoder for ");
+      // System.out.print(i);
+      // System.out.print(" Position ");
+      // System.out.println(position);
       //logger.info("azimuth {}: loaded zero = {}", i, position);
     }
     int errorCount = Errors.getCount();
