@@ -12,7 +12,7 @@ public class PIDFSlot {
       kIZone = 0.0;
       kAllowableError = 0.0;
       kMaxIAccum = 0.0; */
-      kP = 11.75;
+      kP = 9.25;
       kI = 0.0;
       kD = 0.0;
       kF = 0.0;

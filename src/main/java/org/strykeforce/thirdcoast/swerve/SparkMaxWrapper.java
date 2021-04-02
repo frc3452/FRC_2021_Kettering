@@ -11,6 +11,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import org.strykeforce.thirdcoast.swerve.MotorControllerConfig.FeedbackSensor;
 
 import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj.smartdashboard.*;
 
 import com.revrobotics.ControlType;
 import com.revrobotics.EncoderType;
@@ -169,10 +171,11 @@ public class SparkMaxWrapper implements MotorControllerWrapper {
     }
     /* if (isAzimuth) {
         output = output * .75;
-    }
-    if (!isAzimuth) {
-      output = output * .5;
     } */
+    double DriveSpeed = SmartDashboard.getNumber("Drive Speed", 1);
+    if (!isAzimuth) {
+      output = output * DriveSpeed;
+    } 
     pidController.setReference(output, getRevControlType(), slot);
   }
 

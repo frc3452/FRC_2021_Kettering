@@ -19,6 +19,19 @@ public class ShooterSubsystem extends SubsystemBase {
         leftMotor.setInverted(true);
     }
 
+    public void Launch(double rpm) {
+        leftMotor.config_kP(0, .05);
+        leftMotor.config_kF(0, 0.0499999523);
+        leftMotor.config_kD(0, .9);
+        rightMotor.config_kP(0, .05);
+        rightMotor.config_kF(0, 0.0499999523);
+        rightMotor.config_kD(0, .9);
+        // System.out.print("Launching ");
+        // System.out.println(rpm);
+        leftMotor.set(ControlMode.Velocity, -rpm );
+        rightMotor.set(ControlMode.Velocity, rpm);
+        // System.out.println("Launched");
+    }
     public void Forward(double power) {
         leftMotor.set(ControlMode.PercentOutput, -power);
         rightMotor.set(ControlMode.PercentOutput, power);

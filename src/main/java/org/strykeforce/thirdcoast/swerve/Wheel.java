@@ -82,8 +82,8 @@ public class Wheel {
     azimuth *= TICKS * (invertError ? -1.0 : 1.0); // flip azimuth, hardware configuration dependent
 
     double azimuthPosition = azimuthTalon.getPosition();
-    String SwerveCanCoderPositionLabel = "CanCoder Position " + i;
-    SmartDashboard.putNumber(SwerveCanCoderPositionLabel, azimuthPosition);
+    // String SwerveCanCoderPositionLabel = "CanCoder Position " + i;
+    // SmartDashboard.putNumber(SwerveCanCoderPositionLabel, azimuthPosition);
     double azimuthError = Math.IEEEremainder(azimuth - azimuthPosition, TICKS);
 
     // minimize azimuth rotation, reversing drive if necessary
