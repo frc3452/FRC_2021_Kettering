@@ -53,7 +53,7 @@ public class RobotContainer {
             drive.setDefaultCommand(new TeleOpDriveCommand(drive, controls));
             // Shooter 100%
             new JoystickButton(operator, Button.kA.value)
-                    .whileHeld(new MoveShooter(shooter, 1));
+                    .whileHeld(new OpenLoopShooter(shooter, 1));
             // ShooterButtonA.whileHeld(new LaunchShooter(21000));
 
             new JoystickButton(controls, Button.kA.value)

@@ -12,6 +12,7 @@ public class CellLiftSubsystem extends SubsystemBase {
 
     public CellLiftSubsystem() {
         this.cellLiftLeft = new TalonSRX(Constants.CellLift.CELL_LIFT_PORT);
+        this.cellLiftLeft.configFactoryDefault();
 
         cellLiftLeft.setInverted(false);
         // rightMotor.follow(leftMotor);
