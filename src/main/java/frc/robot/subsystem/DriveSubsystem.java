@@ -72,10 +72,17 @@ public class DriveSubsystem extends SubsystemBase {
 
     // Swerve configuration
 
+    private SwerveDriveConfig config;
+
+    public SwerveDriveConfig getConfig() {
+        return config;
+    }
+
     private SwerveDrive getSwerve() {
-        SwerveDriveConfig config = new SwerveDriveConfig();
+        config = new SwerveDriveConfig();
 
         config.gyro = new AHRS(SPI.Port.kMXP);
+        //Heres where the gyro is made
         config.length = ROBOT_LENGTH;
         config.width = ROBOT_WIDTH;
         config.gyroLoggingEnabled = true;

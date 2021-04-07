@@ -23,9 +23,9 @@ public class DriveDistance extends CommandBase {
     double kp = 0.1;
 
     private static final DriveSubsystem DRIVE = RobotContainer.DRIVE;
-    private SwerveDriveConfig config = new SwerveDriveConfig();
+    private SwerveDriveConfig config = DRIVE.getConfig();
 
-    AHRS gyro = config.gyro;
+    AHRS gyro = config.gyro; //this is going to be null
 
     public DriveDistance(double inches, double angle, double yaw) {
         // Use requires() here to declare subsystem dependencies
@@ -33,7 +33,6 @@ public class DriveDistance extends CommandBase {
         this.distance = inches;
         this.azimuthAngle = angle;
         this.yaw = yaw;
-
     }
 
     // Called just before this Command runs the first time
@@ -57,22 +56,22 @@ public class DriveDistance extends CommandBase {
     } */
 
         //for time t, set the motor speed to 1. when time is up, set motor speed to 0. wait 20ms between each iteration.
-        for (double t = 0; t <= time; t += 0.01) {
-            motorSpeed = 1;
-            DRIVE.drive(motorSpeed, azimuthAngle, yaw);
-            if (t >= time) {
-                DRIVE.stopAll();
-            }
-
-            try {
-                wait(10, 0);
-                // TimeUnit.SECONDS.sleep(0.02);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                System.out.println("DriveDistance Wait error");
-            }
-
-        }
+//        for (double t = 0; t <= time; t += 0.01) {
+//            motorSpeed = 1;
+//            DRIVE.drive(motorSpeed, azimuthAngle, yaw);
+//            if (t >= time) {
+//                DRIVE.stopAll();
+//            }
+//
+//            try {
+//                wait(10, 0);
+//                 TimeUnit.SECONDS.sleep(0.02);
+//            } catch (InterruptedException e) {
+//                // TODO Auto-generated catch block
+//                System.out.println("DriveDistance Wait error");
+//            }
+//
+//        }
         isFinished = true;
     }
 
