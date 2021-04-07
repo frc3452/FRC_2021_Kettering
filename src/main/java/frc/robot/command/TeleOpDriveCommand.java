@@ -7,7 +7,7 @@ import frc.robot.subsystem.DriveSubsystem;
 
 public final class TeleOpDriveCommand extends CommandBase {
 
-  private static final double DEADBAND = 0.05;
+  private static final double DEADBAND = 0.1;
   private static final DriveSubsystem DRIVE = RobotContainer.DRIVE;
   private static final XboxController controls = RobotContainer.CONTROLS;
 

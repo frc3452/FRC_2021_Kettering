@@ -128,7 +128,7 @@ public class Wheel {
     switch (driveMode) {
       case OPEN_LOOP:
       case TELEOP:
-        driver = (setpoint) -> driveTalon.set(setpoint);
+        driver = (setpoint) -> driveTalon.set(setpoint * .75);  // THIS CHANGES THE FEET PER SECOND
         break;
       case CLOSED_LOOP:
       case TRAJECTORY:

@@ -3,6 +3,7 @@ package org.strykeforce.thirdcoast.swerve;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.*;
+import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj.shuffleboard.*;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
@@ -30,7 +31,7 @@ public class SwerveDrive {
   private final double kWidthComponent;
   private final double kGyroRateCorrection;
   private final Wheel[] wheels;
-  private final double[] ws = new double[WHEEL_COUNT];
+  public final double[] ws = new double[WHEEL_COUNT];
   private final double[] wa = new double[WHEEL_COUNT];
   private boolean isFieldOriented;
 
@@ -109,7 +110,7 @@ public class SwerveDrive {
       // System.out.println(drive);
       // SmartDashboard.putNumber("Drive Set", drive);
       // SmartDashboard.putNumber("Azimuth Set", azimuth);
-      SmartDashboard.putNumber("CanCoder Position", wheels[0].getAzimuthAbsolutePosition());
+      // SmartDashboard.putNumber("CanCoder Position", wheels[0].getAzimuthAbsolutePosition());
       wheel.set(azimuth, drive, 5);
     }
   }

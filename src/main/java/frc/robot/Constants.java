@@ -20,6 +20,8 @@ public final class Constants {
     public static final int SHOOTER_RIGHT_PORT = 52;
     public static final int CONVEYOR_PORT = 53;
     public static final int CELL_LIFT_PORT = 54;
+    public static String SBTabDriverDisplay = "Driver Display";
+    public static int autoColumn = 3;
 
 
 }

@@ -183,6 +183,11 @@ public class SparkMaxWrapper implements MotorControllerWrapper {
     encoder.setPosition(position);
   }
 
+  public void getSelectedSensorPosition() {
+
+
+  }
+
   public void setNeutralOutput() {
     set(0.0);
   }
@@ -193,6 +198,10 @@ public class SparkMaxWrapper implements MotorControllerWrapper {
 
   public double getAbsPosition() {
     return encoder.getAbsolutePosition();
+  }
+
+  public double getDrivePosition() {
+    return canEncoder.getPosition();
   }
 
   public double getVelocity() {

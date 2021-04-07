@@ -3,15 +3,25 @@ package frc.robot.subsystem;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
+import org.strykeforce.thirdcoast.swerve.SwerveDrive.DriveMode;
+import frc.robot.Motion.PathController;
+
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 import org.strykeforce.thirdcoast.swerve.SwerveDrive;
 import org.strykeforce.thirdcoast.swerve.SwerveDriveConfig;
+import org.strykeforce.thirdcoast.swerve.Wheel;
 
 public class DriveSubsystem extends SubsystemBase {
 
   private static final double ROBOT_LENGTH = 27.5; // 27.5in 0.6985m
   private static final double ROBOT_WIDTH = 16; // 16in 0.4064m
+  private PathController pathController;
+  private static boolean enableDriveAxisFlip = false;
+  private double targetYaw;
+  private double yawError;
+  private boolean isPath = false;
 
   private final SwerveDrive swerve = getSwerve();
 
@@ -36,6 +46,17 @@ public class DriveSubsystem extends SubsystemBase {
     double adj = gyro.getAngle() % 360;
     gyro.setAngleAdjustment(-adj);
     //logger.info("resetting gyro: ({})", adj);
+  }
+
+  public void startPath(String path, double targetYaw, boolean isDriftOut) {
+    this.targetYaw = targetYaw;
+    this.pathController = new PathController(path, targetYaw, isDriftOut);
+    pathController.start();
+    isPath = true;
+  }
+
+  public AHRS getGyro() {
+    return swerve.getGyro();
   }
 
   public void zeroAzimuths() {
@@ -68,4 +89,36 @@ public class DriveSubsystem extends SubsystemBase {
     config.wheels = config.getWheels();
     return new SwerveDrive(config);
   }
+
+  public Wheel[] getAllWheels() {
+    return swerve.getWheels();
+  }
+
+    ////////////////////////////////////////////////////////////////////////////
+  // PATHFINDER
+  ////////////////////////////////////////////////////////////////////////////
+
+  private void setEnableDriveAxisFlip(boolean enable) {
+    enableDriveAxisFlip = enable;
+  }
+
+
+
+  public void setDriveMode(DriveMode mode) {
+    swerve.setDriveMode(mode);
+  }
+
+  public void zeroYawEncoders() {
+    swerve.zeroAzimuthEncoders();
+  }
+
+  public boolean isPathFinished() {
+    if (pathController.isFinished()) {
+      isPath = false;
+      return true;
+    }
+    return false;
+  }
+
+
 }

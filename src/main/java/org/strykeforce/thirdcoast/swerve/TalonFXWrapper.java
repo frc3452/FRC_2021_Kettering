@@ -81,6 +81,11 @@ public class TalonFXWrapper extends TalonBaseWrapper {
     return talonFX.getSelectedSensorPosition();
   }
 
+  
+  public double getDrivePosition() {
+    return talonFX.getSelectedSensorPosition();
+  }
+
   public double getVelocity() {
     return talonFX.getSelectedSensorVelocity();
   }

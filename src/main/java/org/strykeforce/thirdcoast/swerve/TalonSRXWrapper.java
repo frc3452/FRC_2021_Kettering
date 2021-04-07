@@ -80,6 +80,11 @@ public class TalonSRXWrapper extends TalonBaseWrapper {
     return talonSRX.getSensorCollection().getPulseWidthPosition();
   }
 
+  
+  public double getDrivePosition() {
+    return talonSRX.getSelectedSensorPosition();
+  }
+
   public double getVelocity() {
     return talonSRX.getSelectedSensorVelocity();
   }

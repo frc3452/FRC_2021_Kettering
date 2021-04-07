@@ -4,9 +4,19 @@ import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj.SPI;
 import frc.robot.command.*;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import frc.robot.command.Autons.bounce;
+import frc.robot.command.Autons.testAuto;
+import com.kauailabs.navx.frc.AHRS;
+
 
 import frc.robot.subsystem.DriveSubsystem;
 import frc.robot.subsystem.ShooterSubsystem;
@@ -27,10 +37,19 @@ public class RobotContainer {
   public JoystickButton ShooterButtonY;
   public JoystickButton ShooterButtonX;
   public JoystickButton ShooterButtonStart;
+  public JoystickButton DriveButtonA;
+  public JoystickButton DriveButtonB;
+  public JoystickButton DriveButtonX;
+  public JoystickButton DriveButtonY;
+  public JoystickButton DriveButtonStart;
+  public JoystickButton DriveButtonBack;
+  public JoystickButton DriveButtonLBump;
+  public JoystickButton DriveButtonRBump;
   public JoystickButton ConveyorForwardButton;
   public JoystickButton ConveyorBackwardButton;
   public JoystickButton CellLiftForwardButton;
   public JoystickButton CellLiftBackwardButton;
+  private SendableChooser<Command> command = new SendableChooser<>();
 
   public RobotContainer() {
     ;
@@ -49,31 +68,38 @@ public class RobotContainer {
       DRIVE.setDefaultCommand(new TeleOpDriveCommand());
       // Shooter 100%
       ShooterButtonA = new JoystickButton(OPERATOR, Button.kA.value);
-      ShooterButtonA.whileHeld(new LaunchShooter(20000));
-      // ShooterButtonA.whileHeld(new MoveShooter(1));
+      // ShooterButtonA.whileHeld(new LaunchShooter(21000));
+      ShooterButtonA.whileHeld(new MoveShooter(1));
+
+      DriveButtonA = new JoystickButton(CONTROLS, Button.kA.value);
+      DriveButtonA.whileHeld(new FullLaunchShooter(21000));
+
 
       // Shooter 70%
       ShooterButtonB = new JoystickButton(OPERATOR, Button.kB.value);
-      ShooterButtonB.whileHeld(new LaunchShooter(13500));
+      ShooterButtonB.whileHeld(new LaunchShooter(13800));
       // ShooterButtonB.whileHeld(new MoveShooter(.7));
+
+      DriveButtonB = new JoystickButton(CONTROLS, Button.kB.value);
+      DriveButtonB.whileHeld(new LaunchShooter(13800));
 
       // Shooter 74%
       ShooterButtonY = new JoystickButton(OPERATOR, Button.kY.value);
-      ShooterButtonY.whileHeld(new LaunchShooter(16000));
+      ShooterButtonY.whileHeld(new LaunchShooter(14875));
       // ShooterButtonY.whileHeld(new MoveShooter(.74));
 
       // Shooter 81% 
       ShooterButtonX = new JoystickButton(OPERATOR, Button.kX.value);
-      ShooterButtonX.whileHeld(new LaunchShooter(17000));
+      ShooterButtonX.whileHeld(new LaunchShooter(16075));
       // ShooterButtonX.whileHeld(new MoveShooter(.81));
 
       // Shooter velocity
       ShooterButtonStart = new JoystickButton(OPERATOR, Button.kStart.value);
-      ShooterButtonStart.whileHeld(new LaunchShooter(15000));
+      ShooterButtonStart.whileHeld(new LaunchShooter(15800));
 
       // Conveyor Forward
       ConveyorForwardButton = new JoystickButton(OPERATOR, Button.kBumperRight.value);
-      ConveyorForwardButton.whileHeld(new MoveConveyor(-0.75));
+      ConveyorForwardButton.whileHeld(new MoveConveyor(-0.35));
 
       // Conveyor Backward
       // ConveyorBackwardButton = new JoystickButton(OPERATOR, Button.kBumperLeft.value);
@@ -81,25 +107,45 @@ public class RobotContainer {
 
       // Cell Lift Forward
       CellLiftForwardButton = new JoystickButton(OPERATOR, Button.kBumperLeft.value);
-      CellLiftForwardButton.whileHeld(new MoveCellLift(0.50));
+      CellLiftForwardButton.whileHeld(new MoveCellLift(0.45));
 
 
 
       // Cell lift Backward
-      CellLiftBackwardButton = new JoystickButton(CONTROLS, Button.kBumperLeft.value);
-      CellLiftBackwardButton.whileHeld(new MoveCellLift(-0.25));
+      DriveButtonLBump = new JoystickButton(CONTROLS, Button.kBumperLeft.value);
+      DriveButtonLBump.whileHeld(new MoveCellLift(-0.25));
+
+      DriveButtonRBump = new JoystickButton(CONTROLS, Button.kBumperRight.value);
+      DriveButtonRBump.whileHeld(new MoveConveyor(.25));
+
+
 
       //Zero Gyro Command
-       new JoystickButton(CONTROLS, Button.kA.value)
+       new JoystickButton(CONTROLS, Button.kStart.value)
          .whenPressed(() -> DRIVE.zeroGyro());
 
       //Zero Azimuths Command
-       new JoystickButton(CONTROLS, Button.kB.value)
-        .whenPressed(() -> DRIVE.zeroAzimuths());
+       // new JoystickButton(CONTROLS, Button.kB.value)
+       // .whenPressed(() -> DRIVE.zeroAzimuths());
       
       //Save Azimuth zeroes Command
       // new JoystickButton(CONTROLS, Button.kX.value)
       //  .whenPressed(() -> DRIVE.saveAzimuthPositions());
     }
+    command.setDefaultOption("Test", new testAuto());
+    command.addOption("Bounce",new bounce());
+    Shuffleboard.getTab(Constants.SBTabDriverDisplay)
+    .getLayout("Auto", BuiltInLayouts.kList).withPosition(Constants.autoColumn, 0).withSize(3, 1)
+    .add("Choose an Auto Mode", command).withWidget(BuiltInWidgets.kSplitButtonChooser);
+  }
+
+    /**
+   * Use this to pass the autonomous command to the main {@link Robot} class.
+   *
+   * @return the command to run in autonomous
+   */
+  public Command getAutonomousCommand() {
+    // An ExampleCommand will run in autonomous
+    return command.getSelected();
   }
 }

@@ -26,6 +26,8 @@ public abstract interface MotorControllerWrapper {
 
   public abstract double getAbsPosition();
 
+  public abstract double getDrivePosition();
+
   public abstract double getVelocity();
 
   public abstract double getOutput();

@@ -85,6 +85,11 @@ public class VictorSPXWrapper extends TalonBaseWrapper {
     return canCoder.getAbsolutePosition();
   }
 
+  
+  public double getDrivePosition() {
+    return canCoder.getPosition();
+  }
+
   public double getVelocity() {
     return canCoder.getVelocity();
   }
