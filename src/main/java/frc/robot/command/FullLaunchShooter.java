@@ -1,12 +1,11 @@
 package frc.robot.command;
 
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandGroupBase;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 
-public class FullLaunchShooter extends CommandGroupBase {
-    private CommandGroupBase auto;
-    private boolean done = false;
-
+public class FullLaunchShooter extends ParallelCommandGroup {
     public FullLaunchShooter(double speed) {
         addCommands(
                 new LaunchShooter(speed).withTimeout(5),
@@ -15,31 +14,11 @@ public class FullLaunchShooter extends CommandGroupBase {
         );
     }
 
-    public void initialize() {
+    //If you want it to be immediately complete, override the isFinished method
+    //Otherwise, it will be complete when all of the commands are done
 
-    }
-
-    @Override
-    public void addCommands(Command... commands) {
-        auto = parallel(commands);
-    }
-
-    public void execute() {
-        if (!done) {
-            auto.schedule();
-            done = true;
-        }
-    }
-
-    public boolean isFinished() {
-        return done;
-    }
-
-    public void end(boolean interrupted) {
-        done = false;
-    }
-
-    ////////
-
-
+    //    @Override
+    //    public boolean isFinished() {
+    //        return true;
+    //    }
 }

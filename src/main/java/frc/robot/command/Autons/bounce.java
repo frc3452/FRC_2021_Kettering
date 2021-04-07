@@ -1,13 +1,9 @@
 package frc.robot.command.Autons;
 
-import edu.wpi.first.wpilibj2.command.CommandGroupBase;
-import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.command.Movements.DriveDistance;
 
-public class bounce extends CommandGroupBase {
-
-    private CommandGroupBase auto;
-    private boolean done = false;
+public class bounce extends SequentialCommandGroup {
 
     public bounce() {
         addCommands(
@@ -20,29 +16,5 @@ public class bounce extends CommandGroupBase {
                 new DriveDistance(1, 86, 0),
                 new DriveDistance(60, 0, 0)
         );
-    }
-
-    public void initialize() {
-
-    }
-
-    @Override
-    public void addCommands(Command... commands) {
-        auto = sequence(commands);
-    }
-
-    public void execute() {
-        if (!done) {
-            auto.schedule();
-            done = true;
-        }
-    }
-
-    public boolean isFinished() {
-        return done;
-    }
-
-    public void end(boolean interrupted) {
-        done = false;
     }
 }
