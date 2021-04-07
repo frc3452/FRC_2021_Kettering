@@ -2,34 +2,34 @@ package frc.robot.command.movements;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystem.DriveSubsystem;
-import frc.robot.RobotContainer;
 
 public class DriveTrajectory extends CommandBase {
 
-    private static final DriveSubsystem DRIVE = RobotContainer.DRIVE;
+    private final DriveSubsystem driveSubsystem;
     private final String name;
     private final double targetYaw;
     private final boolean isDriftOut;
 
-    public DriveTrajectory(String name, double targetYaw) {
-        this(name, targetYaw, true);
+    public DriveTrajectory(DriveSubsystem driveSubsystem, String name, double targetYaw) {
+        this(driveSubsystem, name, targetYaw, true);
     }
 
-    public DriveTrajectory(String name, double targetYaw, boolean isDriftOut) {
+    public DriveTrajectory(DriveSubsystem driveSubsystem, String name, double targetYaw, boolean isDriftOut) {
+        this.driveSubsystem = driveSubsystem;
         this.name = name;
         this.targetYaw = targetYaw;
         this.isDriftOut = isDriftOut;
-        // requires(DRIVE);
+        addRequirements(driveSubsystem);
     }
 
     @Override
     public void initialize() {
-        DRIVE.startPath(name, targetYaw, isDriftOut);
+        driveSubsystem.startPath(name, targetYaw, isDriftOut);
     }
 
     @Override
     public boolean isFinished() {
-        return DRIVE.isPathFinished();
+        return driveSubsystem.isPathFinished();
     }
   
     /* @Override

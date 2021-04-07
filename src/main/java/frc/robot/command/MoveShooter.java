@@ -9,8 +9,8 @@ public class MoveShooter extends CommandBase {
     private ShooterSubsystem shooter;
     private double speed;
 
-    public MoveShooter(double speed) {
-        this.shooter = RobotContainer.SHOOTER;
+    public MoveShooter(ShooterSubsystem shooter, double speed) {
+        this.shooter = shooter;
         this.speed = speed;
 
         addRequirements(shooter);

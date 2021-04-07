@@ -48,7 +48,7 @@ public class DriveSubsystem extends SubsystemBase {
 
     public void startPath(String path, double targetYaw, boolean isDriftOut) {
         this.targetYaw = targetYaw;
-        this.pathController = new PathController(path, targetYaw, isDriftOut);
+        this.pathController = new PathController(this, path, targetYaw, isDriftOut);
         pathController.start();
         isPath = true;
     }

@@ -1,7 +1,6 @@
 package frc.robot.motion;
 
 import edu.wpi.first.wpilibj.Notifier;
-import frc.robot.RobotContainer;
 import frc.robot.subsystem.DriveSubsystem;
 
 import java.io.File;
@@ -13,7 +12,7 @@ public class PathController implements Runnable {
 
     private static final int NUM_WHEELS = 4;
     private static final int TICKS_PER_INCH = 2300;
-    private static final DriveSubsystem DRIVE = RobotContainer.DRIVE;
+    private final DriveSubsystem drive;
 
     @SuppressWarnings("FieldCanBeLocal")
     private static final double yawKp = 0.01; // 0.03
@@ -39,10 +38,11 @@ public class PathController implements Runnable {
     private double yawError;
     private boolean isDriftOut;
 
-    public PathController(String pathName, double yawDelta, boolean isDriftOut) {
+    public PathController(DriveSubsystem driveSubsystem, String pathName, double yawDelta, boolean isDriftOut) {
+        this.drive = driveSubsystem;
         this.yawDelta = yawDelta;
         this.isDriftOut = isDriftOut;
-        wheels = DRIVE.getAllWheels();
+        wheels = drive.getAllWheels();
         File csvFile = new File("home/lvuser/deploy/paths/" + pathName + ".pf1.csv");
 
         trajectory = new Trajectory(csvFile);
@@ -68,13 +68,13 @@ public class PathController implements Runnable {
                 double ticksPerSecMax = wheels[0].getDriveSetpointMax() * 10.0;
                 maxVelocityInSec = ticksPerSecMax / TICKS_PER_INCH;
                 iteration = 0;
-                DRIVE.setDriveMode(SwerveDrive.DriveMode.CLOSED_LOOP);
+                drive.setDriveMode(SwerveDrive.DriveMode.CLOSED_LOOP);
 
                 for (int i = 0; i < NUM_WHEELS; i++) {
                     start[i] = wheels[i].getDriveTalon().getDrivePosition();
                 }
 
-                double currentAngle = DRIVE.getGyro().getAngle();
+                double currentAngle = drive.getGyro().getAngle();
                 setpoint = new Setpoint(currentAngle, yawDelta, percentToDone);
 
                 logInit();
@@ -105,18 +105,18 @@ public class PathController implements Runnable {
 
                 setpointPos = setpoint.getSetpoint(currentProgress);
 
-                yawError = setpointPos - DRIVE.getGyro().getAngle();
+                yawError = setpointPos - drive.getGyro().getAngle();
                 double yaw;
 
                 yaw = yawError * yawKp;
 
                 // if (forward > 1d || strafe > 1d) logger.warn("forward = {} strafe = {}", forward, strafe);
 
-                DRIVE.drive(forward, strafe, yaw);
+                drive.drive(forward, strafe, yaw);
                 iteration++;
                 break;
             case STOPPING:
-                DRIVE.setDriveMode(SwerveDrive.DriveMode.OPEN_LOOP);
+                drive.setDriveMode(SwerveDrive.DriveMode.OPEN_LOOP);
                 logState();
                 state = States.STOPPED;
                 break;

@@ -1,7 +1,6 @@
 package frc.robot.command.movements;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
 import frc.robot.subsystem.DriveSubsystem;
 import org.strykeforce.thirdcoast.swerve.SwerveDriveConfig;
 import com.kauailabs.navx.frc.AHRS;
@@ -22,17 +21,22 @@ public class DriveDistance extends CommandBase {
     double threshold = 3.0;
     double kp = 0.1;
 
-    private static final DriveSubsystem DRIVE = RobotContainer.DRIVE;
-    private SwerveDriveConfig config = DRIVE.getConfig();
+    private final DriveSubsystem drive;
+    private final SwerveDriveConfig config;
 
-    AHRS gyro = config.gyro; //this is going to be null
+    private final AHRS gyro;
 
-    public DriveDistance(double inches, double angle, double yaw) {
+    public DriveDistance(DriveSubsystem driveSubsystem, double inches, double angle, double yaw) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+        this.drive = driveSubsystem;
+        this.config = drive.getConfig();
+        this.gyro = config.gyro;
+
         this.distance = inches;
         this.azimuthAngle = angle;
         this.yaw = yaw;
+        addRequirements(driveSubsystem);
     }
 
     // Called just before this Command runs the first time

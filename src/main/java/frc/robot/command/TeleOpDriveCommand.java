@@ -2,17 +2,18 @@ package frc.robot.command;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
 import frc.robot.subsystem.DriveSubsystem;
 
 public final class TeleOpDriveCommand extends CommandBase {
 
     private static final double DEADBAND = 0.1;
-    private static final DriveSubsystem DRIVE = RobotContainer.DRIVE;
-    private static final XboxController controls = RobotContainer.CONTROLS;
+    private final DriveSubsystem drive;
+    private final XboxController controls;
 
-    public TeleOpDriveCommand() {
-        addRequirements(DRIVE);
+    public TeleOpDriveCommand(DriveSubsystem drive, XboxController controls) {
+        this.drive = drive;
+        this.controls = controls;
+        addRequirements(drive);
     }
 
     @Override
@@ -27,14 +28,14 @@ public final class TeleOpDriveCommand extends CommandBase {
     System.out.print(" yaw: ");
     System.out.println(yaw); */
         if (forward == 0 && strafe == 0 && yaw == 0) {
-            DRIVE.stopAll();
+            drive.stopAll();
         }
-        DRIVE.drive(forward, strafe, yaw);
+        drive.drive(forward, strafe, yaw);
     }
 
     @Override
     public void end(boolean interrupted) {
-        DRIVE.drive(0.0, 0.0, 0.0);
+        drive.drive(0.0, 0.0, 0.0);
     }
 
     private double deadband(double value) {

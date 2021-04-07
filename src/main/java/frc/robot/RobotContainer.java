@@ -28,12 +28,12 @@ import frc.robot.subsystem.ConveyorSubsystem;
 
 public class RobotContainer {
     //public static TelemetryService TELEMETRY;
-    public static DriveSubsystem DRIVE = new DriveSubsystem();
-    public static XboxController CONTROLS = new XboxController(0);
-    public static XboxController OPERATOR = new XboxController(1);
-    public static ShooterSubsystem SHOOTER = new ShooterSubsystem();
-    public static ConveyorSubsystem CONVEYOR = new ConveyorSubsystem();
-    public static CellLiftSubsystem CELL_LIFT = new CellLiftSubsystem();
+    private final DriveSubsystem drive = new DriveSubsystem();
+    private final XboxController controls = new XboxController(0);
+    private final XboxController operator = new XboxController(1);
+    private final ShooterSubsystem shooter = new ShooterSubsystem();
+    private final ConveyorSubsystem conveyor = new ConveyorSubsystem();
+    private final CellLiftSubsystem cellLift = new CellLiftSubsystem();
 
     private SendableChooser<Command> command = new SendableChooser<>();
 
@@ -49,63 +49,63 @@ public class RobotContainer {
             SmartDashboard.putNumber("Drive Speed", driveSpeed);
 
             //TELEMETRY.start();
-            DRIVE.stopAll();
-            DRIVE.setDefaultCommand(new TeleOpDriveCommand());
+            drive.stopAll();
+            drive.setDefaultCommand(new TeleOpDriveCommand(drive, controls));
             // Shooter 100%
-            new JoystickButton(OPERATOR, Button.kA.value)
-                    .whileHeld(new MoveShooter(1));
+            new JoystickButton(operator, Button.kA.value)
+                    .whileHeld(new MoveShooter(shooter, 1));
             // ShooterButtonA.whileHeld(new LaunchShooter(21000));
 
-            new JoystickButton(CONTROLS, Button.kA.value)
-                    .whileHeld(new FullLaunchShooter(21000));
+            new JoystickButton(controls, Button.kA.value)
+                    .whileHeld(new FullLaunchShooter(shooter, cellLift, conveyor, 21000));
 
 
             // Shooter 70%
-            new JoystickButton(OPERATOR, Button.kB.value)
-                    .whileHeld(new LaunchShooter(13800));
+            new JoystickButton(operator, Button.kB.value)
+                    .whileHeld(new LaunchShooter(shooter, 13800));
             // ShooterButtonB.whileHeld(new MoveShooter(.7));
 
-            new JoystickButton(CONTROLS, Button.kB.value)
-                    .whileHeld(new LaunchShooter(13800));
+            new JoystickButton(controls, Button.kB.value)
+                    .whileHeld(new LaunchShooter(shooter, 13800));
 
             // Shooter 74%
-            new JoystickButton(OPERATOR, Button.kY.value)
-                    .whileHeld(new LaunchShooter(14875));
+            new JoystickButton(operator, Button.kY.value)
+                    .whileHeld(new LaunchShooter(shooter, 14875));
             // ShooterButtonY.whileHeld(new MoveShooter(.74));
 
             // Shooter 81%
-            new JoystickButton(OPERATOR, Button.kX.value)
-                    .whileHeld(new LaunchShooter(16075));
+            new JoystickButton(operator, Button.kX.value)
+                    .whileHeld(new LaunchShooter(shooter, 16075));
             // ShooterButtonX.whileHeld(new MoveShooter(.81));
 
             // Shooter velocity
-            new JoystickButton(OPERATOR, Button.kStart.value)
-                    .whileHeld(new LaunchShooter(15800));
+            new JoystickButton(operator, Button.kStart.value)
+                    .whileHeld(new LaunchShooter(shooter, 15800));
 
             // Conveyor forward
-            new JoystickButton(OPERATOR, Button.kBumperRight.value)
-                    .whileHeld(new MoveConveyor(ConveyorSpeeds.FORWARDS));
+            new JoystickButton(operator, Button.kBumperRight.value)
+                    .whileHeld(new MoveConveyor(conveyor, ConveyorSpeeds.FORWARDS));
 
             // Conveyor backward
             // ConveyorBackwardButton = new JoystickButton(OPERATOR, Button.kBumperLeft.value);
             // ConveyorBackwardButton.whileHeld(new MoveConveyor(-0.50));
 
             // Cell Lift forward
-            new JoystickButton(OPERATOR, Button.kBumperLeft.value)
-                    .whileHeld(new MoveCellLift(CellLiftSpeeds.MOVE_CELL_FORWARD));
+            new JoystickButton(operator, Button.kBumperLeft.value)
+                    .whileHeld(new MoveCellLift(cellLift, CellLiftSpeeds.MOVE_CELL_FORWARD));
 
 
             // Cell lift backward
-            new JoystickButton(CONTROLS, Button.kBumperLeft.value)
-                    .whileHeld(new MoveCellLift(CellLiftSpeeds.MOVE_CELL_BACKWARDS));
+            new JoystickButton(controls, Button.kBumperLeft.value)
+                    .whileHeld(new MoveCellLift(cellLift, CellLiftSpeeds.MOVE_CELL_BACKWARDS));
 
-            new JoystickButton(CONTROLS, Button.kBumperRight.value)
-                    .whileHeld(new MoveConveyor(ConveyorSpeeds.BACKWARDS));
+            new JoystickButton(controls, Button.kBumperRight.value)
+                    .whileHeld(new MoveConveyor(conveyor, ConveyorSpeeds.BACKWARDS));
 
 
             //Zero Gyro Command
-            new JoystickButton(CONTROLS, Button.kStart.value)
-                    .whenPressed(() -> DRIVE.zeroGyro());
+            new JoystickButton(controls, Button.kStart.value)
+                    .whenPressed(() -> drive.zeroGyro());
 
             //Zero Azimuths Command
             // new JoystickButton(CONTROLS, Button.kB.value)
@@ -115,11 +115,13 @@ public class RobotContainer {
             // new JoystickButton(CONTROLS, Button.kX.value)
             //  .whenPressed(() -> DRIVE.saveAzimuthPositions());
         }
-        command.setDefaultOption("Test", new TestAuto());
-        command.addOption("Bounce", new Bounce());
+        command.setDefaultOption("Test", new TestAuto(drive));
+        command.addOption("Bounce", new Bounce(drive));
         Shuffleboard.getTab(Constants.SBTabDriverDisplay)
                 .getLayout("Auto", BuiltInLayouts.kList).withPosition(Constants.autoColumn, 0).withSize(3, 1)
                 .add("Choose an Auto Mode", command).withWidget(BuiltInWidgets.kSplitButtonChooser);
+
+        drive.zeroGyro();
     }
 
     /**

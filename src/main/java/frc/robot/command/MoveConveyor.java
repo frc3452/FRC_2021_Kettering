@@ -9,8 +9,8 @@ public class MoveConveyor extends CommandBase {
     private ConveyorSubsystem conveyor;
     private double speed;
 
-    public MoveConveyor(double speed) {
-        this.conveyor = RobotContainer.CONVEYOR;
+    public MoveConveyor(ConveyorSubsystem conveyor, double speed) {
+        this.conveyor = conveyor;
         this.speed = speed;
 
         addRequirements(conveyor);

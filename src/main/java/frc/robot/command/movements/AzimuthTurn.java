@@ -14,11 +14,14 @@ public class AzimuthTurn extends CommandBase {
     double threshold = 3.0;
     double kp = 0.1;
 
-    private static final DriveSubsystem DRIVE = RobotContainer.DRIVE;
-    private SwerveDriveConfig config = new SwerveDriveConfig();
-    AHRS gyro = config.gyro;
+    private final DriveSubsystem drive;
+    private SwerveDriveConfig config;
 
-    public AzimuthTurn(double degrees) {
+    private final AHRS gyro;
+
+    public AzimuthTurn(DriveSubsystem driveSubsystem, double degrees) {
+        this.drive = driveSubsystem;
+        this.gyro = this.drive.getConfig().gyro;
         this.targetAngle = degrees;
     }
 
@@ -36,7 +39,7 @@ public class AzimuthTurn extends CommandBase {
         } else if (headingError < -threshold) {
             steeringAdjust = kp * headingError + minCommand;
         }
-        DRIVE.drive(0, steeringAdjust, 0);
+        drive.drive(0, steeringAdjust, 0);
         // add swerve drive here 
 
         if (headingError >= -threshold && headingError <= threshold) {

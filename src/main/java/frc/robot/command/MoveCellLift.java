@@ -9,8 +9,8 @@ public class MoveCellLift extends CommandBase {
     private CellLiftSubsystem cellLift;
     private double speed;
 
-    public MoveCellLift(double speed) {
-        this.cellLift = RobotContainer.CELL_LIFT;
+    public MoveCellLift(CellLiftSubsystem cellLift, double speed) {
+        this.cellLift = cellLift;
         this.speed = speed;
 
         addRequirements(cellLift);

@@ -34,7 +34,10 @@ public class Robot extends TimedRobot {
     @Override
     public void robotInit() {
         m_robotContainer = new RobotContainer();
-        RobotContainer.DRIVE.zeroGyro();
+        //RobotContainer.DRIVE.zeroGyro();
+        //Moved to container constructor. still happens at the exact same time
+
+
         //logger.debug("Robot initialization complete");
     }
 

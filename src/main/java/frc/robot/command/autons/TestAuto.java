@@ -2,12 +2,13 @@ package frc.robot.command.autons;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.command.movements.DriveTrajectory;
+import frc.robot.subsystem.DriveSubsystem;
 
 public class TestAuto extends SequentialCommandGroup {
 
-    public TestAuto() {
+    public TestAuto(DriveSubsystem driveSubsystem) {
         addCommands(
-                new DriveTrajectory("Slalom", 0.0, false)
+                new DriveTrajectory(driveSubsystem, "Slalom", 0.0, false)
         );
     }
 
