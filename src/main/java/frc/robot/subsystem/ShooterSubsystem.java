@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class ShooterSubsystem extends SubsystemBase {
-    
+
     private TalonFX leftMotor;
     // private TalonFX rightMotor;
 
@@ -28,10 +28,11 @@ public class ShooterSubsystem extends SubsystemBase {
         // rightMotor.config_kD(0, .9);
         // System.out.print("Launching ");
         // System.out.println(rpm);
-        leftMotor.set(ControlMode.Velocity, -rpm );
+        leftMotor.set(ControlMode.Velocity, -rpm);
         // rightMotor.set(ControlMode.Velocity, rpm);
         // System.out.println("Launched");
     }
+
     public void Forward(double power) {
         leftMotor.set(ControlMode.PercentOutput, -power);
         // rightMotor.set(ControlMode.PercentOutput, power);

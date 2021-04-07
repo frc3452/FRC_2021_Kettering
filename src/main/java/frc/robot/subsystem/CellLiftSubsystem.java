@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class CellLiftSubsystem extends SubsystemBase {
-    
+
     private TalonSRX cellliftleftMotor;
     // private TalonSRX conveyorMotor;
 

@@ -23,5 +23,4 @@ public final class Constants {
     public static String SBTabDriverDisplay = "Driver Display";
     public static int autoColumn = 3;
 
-
 }

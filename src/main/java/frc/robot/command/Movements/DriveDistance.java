@@ -8,51 +8,52 @@ import frc.robot.subsystem.DriveSubsystem;
 import org.strykeforce.thirdcoast.swerve.SwerveDrive;
 import org.strykeforce.thirdcoast.swerve.SwerveDriveConfig;
 import com.kauailabs.navx.frc.AHRS;
+
 import java.util.concurrent.TimeUnit;
 
 public class DriveDistance extends CommandBase {
 
-  boolean isFinished = false;
-  double motorSpeed;
+    boolean isFinished = false;
+    double motorSpeed;
 
-  // distance is in inches, velocity is in inches/sec, time is in s
-  double distance = 0;
-  double azimuthAngle;
-  double yaw;
-  double velocity = 170.4; // inches per sec
-  double time;
-  double targetAngle;
-  double minCommand = 0.05;
-  double threshold = 3.0;   
-  double kp = 0.1;
+    // distance is in inches, velocity is in inches/sec, time is in s
+    double distance = 0;
+    double azimuthAngle;
+    double yaw;
+    double velocity = 170.4; // inches per sec
+    double time;
+    double targetAngle;
+    double minCommand = 0.05;
+    double threshold = 3.0;
+    double kp = 0.1;
 
-  private static final DriveSubsystem DRIVE = RobotContainer.DRIVE;
-  private SwerveDriveConfig config = new SwerveDriveConfig();
-  
-  AHRS gyro = config.gyro;
+    private static final DriveSubsystem DRIVE = RobotContainer.DRIVE;
+    private SwerveDriveConfig config = new SwerveDriveConfig();
 
-  public DriveDistance(double inches, double angle, double yaw) {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    this.distance = inches;
-    this.azimuthAngle = angle;
-    this.yaw = yaw;
- 
-  }
+    AHRS gyro = config.gyro;
 
-  // Called just before this Command runs the first time
-  @Override
-  public void initialize() {
-  }
+    public DriveDistance(double inches, double angle, double yaw) {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+        this.distance = inches;
+        this.azimuthAngle = angle;
+        this.yaw = yaw;
 
-  // Called repeatedly when this Command is scheduled to run
-  @Override
-  public void execute() {
+    }
 
-    time = distance / velocity;
+    // Called just before this Command runs the first time
+    @Override
+    public void initialize() {
+    }
 
-    // double headingError = azimuthAngle - (gyro.getAngle() % 360);
-    double steeringAdjust = 0.0;
+    // Called repeatedly when this Command is scheduled to run
+    @Override
+    public void execute() {
+
+        time = distance / velocity;
+
+        // double headingError = azimuthAngle - (gyro.getAngle() % 360);
+        double steeringAdjust = 0.0;
 
     /* if (headingError > threshold){
         steeringAdjust = kp*headingError - minCommand;
@@ -60,37 +61,37 @@ public class DriveDistance extends CommandBase {
         steeringAdjust = kp*headingError + minCommand;
     } */
 
-    //for time t, set the motor speed to 1. when time is up, set motor speed to 0. wait 20ms between each iteration.
-    for (double t = 0; t <= time; t += 0.01) {
-      motorSpeed = 1;
-      DRIVE.drive(motorSpeed, azimuthAngle, yaw);
-      if (t >= time) {
-        DRIVE.stopall();
-      }
+        //for time t, set the motor speed to 1. when time is up, set motor speed to 0. wait 20ms between each iteration.
+        for (double t = 0; t <= time; t += 0.01) {
+            motorSpeed = 1;
+            DRIVE.drive(motorSpeed, azimuthAngle, yaw);
+            if (t >= time) {
+                DRIVE.stopall();
+            }
 
-     try {
-        wait(10, 0);
-        // TimeUnit.SECONDS.sleep(0.02);
-      } catch (InterruptedException e) {
-        // TODO Auto-generated catch block
-        System.out.println("DriveDistance Wait error");
-      } 
-      
-      }
-      isFinished = true;
+            try {
+                wait(10, 0);
+                // TimeUnit.SECONDS.sleep(0.02);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                System.out.println("DriveDistance Wait error");
+            }
+
+        }
+        isFinished = true;
     }
 
 
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  public boolean isFinished() {
-    return isFinished;
-  }
+    // Make this return true when this Command no longer needs to run execute()
+    @Override
+    public boolean isFinished() {
+        return isFinished;
+    }
 
-  // Called once after isFinished returns true
-  @Override
-  public void end(boolean interrupted) {
-  }
+    // Called once after isFinished returns true
+    @Override
+    public void end(boolean interrupted) {
+    }
 
   /*
   void integrateAcceleration(){

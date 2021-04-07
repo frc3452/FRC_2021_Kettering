@@ -6,22 +6,22 @@ import frc.robot.subsystem.ShooterSubsystem;
 public class MoveShooter extends CommandBase {
 
     private ShooterSubsystem shooter;
-    private double speed; 
-    
+    private double speed;
+
     public MoveShooter(double speed) {
         this.shooter = new ShooterSubsystem();
-        this.speed = speed; 
+        this.speed = speed;
 
-        addRequirements(shooter); 
+        addRequirements(shooter);
     }
-    
+
     public void initialize() {
 
     }
-    
+
     public void execute() {
-                    shooter.Forward(speed);
-        }
+        shooter.Forward(speed);
+    }
 
     @Override
     public void end(boolean interrupted) {

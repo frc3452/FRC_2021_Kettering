@@ -26,126 +26,123 @@ import frc.robot.subsystem.ConveyorSubsystem;
 
 
 public class RobotContainer {
-  //public static TelemetryService TELEMETRY;
-  public static DriveSubsystem DRIVE = new DriveSubsystem();
-  public static XboxController CONTROLS = new XboxController(0);
-  public static XboxController OPERATOR = new XboxController(1);
-  public static ShooterSubsystem SHOOTER = new ShooterSubsystem();
-  public static ConveyorSubsystem CONVEYOR = new ConveyorSubsystem();
-  public JoystickButton ShooterButtonA;
-  public JoystickButton ShooterButtonB;
-  public JoystickButton ShooterButtonY;
-  public JoystickButton ShooterButtonX;
-  public JoystickButton ShooterButtonStart;
-  public JoystickButton DriveButtonA;
-  public JoystickButton DriveButtonB;
-  public JoystickButton DriveButtonX;
-  public JoystickButton DriveButtonY;
-  public JoystickButton DriveButtonStart;
-  public JoystickButton DriveButtonBack;
-  public JoystickButton DriveButtonLBump;
-  public JoystickButton DriveButtonRBump;
-  public JoystickButton ConveyorForwardButton;
-  public JoystickButton ConveyorBackwardButton;
-  public JoystickButton CellLiftForwardButton;
-  public JoystickButton CellLiftBackwardButton;
-  private SendableChooser<Command> command = new SendableChooser<>();
+    //public static TelemetryService TELEMETRY;
+    public static DriveSubsystem DRIVE = new DriveSubsystem();
+    public static XboxController CONTROLS = new XboxController(0);
+    public static XboxController OPERATOR = new XboxController(1);
+    public static ShooterSubsystem SHOOTER = new ShooterSubsystem();
+    public static ConveyorSubsystem CONVEYOR = new ConveyorSubsystem();
+    public JoystickButton ShooterButtonA;
+    public JoystickButton ShooterButtonB;
+    public JoystickButton ShooterButtonY;
+    public JoystickButton ShooterButtonX;
+    public JoystickButton ShooterButtonStart;
+    public JoystickButton DriveButtonA;
+    public JoystickButton DriveButtonB;
+    public JoystickButton DriveButtonX;
+    public JoystickButton DriveButtonY;
+    public JoystickButton DriveButtonStart;
+    public JoystickButton DriveButtonBack;
+    public JoystickButton DriveButtonLBump;
+    public JoystickButton DriveButtonRBump;
+    public JoystickButton ConveyorForwardButton;
+    public JoystickButton ConveyorBackwardButton;
+    public JoystickButton CellLiftForwardButton;
+    public JoystickButton CellLiftBackwardButton;
+    private SendableChooser<Command> command = new SendableChooser<>();
 
-  public RobotContainer() {
-    ;
+    public RobotContainer() {
 
-    if (RobotBase.isReal()) {
+        if (RobotBase.isReal()) {
 
-      //TELEMETRY = new TelemetryService(TelemetryController::new);
+            //TELEMETRY = new TelemetryService(TelemetryController::new);
 
-      // Display current speed multiplier
-      Preferences prefs = Preferences.getInstance();
-      int DriveSpeed = prefs.getInt("MaxDriveSpeed", 1);
-      SmartDashboard.putNumber("Drive Speed", DriveSpeed);
+            // Display current speed multiplier
+            Preferences prefs = Preferences.getInstance();
+            int DriveSpeed = prefs.getInt("MaxDriveSpeed", 1);
+            SmartDashboard.putNumber("Drive Speed", DriveSpeed);
 
-      //TELEMETRY.start();
-      DRIVE.stopall();
-      DRIVE.setDefaultCommand(new TeleOpDriveCommand());
-      // Shooter 100%
-      ShooterButtonA = new JoystickButton(OPERATOR, Button.kA.value);
-      // ShooterButtonA.whileHeld(new LaunchShooter(21000));
-      ShooterButtonA.whileHeld(new MoveShooter(1));
+            //TELEMETRY.start();
+            DRIVE.stopall();
+            DRIVE.setDefaultCommand(new TeleOpDriveCommand());
+            // Shooter 100%
+            ShooterButtonA = new JoystickButton(OPERATOR, Button.kA.value);
+            // ShooterButtonA.whileHeld(new LaunchShooter(21000));
+            ShooterButtonA.whileHeld(new MoveShooter(1));
 
-      DriveButtonA = new JoystickButton(CONTROLS, Button.kA.value);
-      DriveButtonA.whileHeld(new FullLaunchShooter(21000));
-
-
-      // Shooter 70%
-      ShooterButtonB = new JoystickButton(OPERATOR, Button.kB.value);
-      ShooterButtonB.whileHeld(new LaunchShooter(13800));
-      // ShooterButtonB.whileHeld(new MoveShooter(.7));
-
-      DriveButtonB = new JoystickButton(CONTROLS, Button.kB.value);
-      DriveButtonB.whileHeld(new LaunchShooter(13800));
-
-      // Shooter 74%
-      ShooterButtonY = new JoystickButton(OPERATOR, Button.kY.value);
-      ShooterButtonY.whileHeld(new LaunchShooter(14875));
-      // ShooterButtonY.whileHeld(new MoveShooter(.74));
-
-      // Shooter 81% 
-      ShooterButtonX = new JoystickButton(OPERATOR, Button.kX.value);
-      ShooterButtonX.whileHeld(new LaunchShooter(16075));
-      // ShooterButtonX.whileHeld(new MoveShooter(.81));
-
-      // Shooter velocity
-      ShooterButtonStart = new JoystickButton(OPERATOR, Button.kStart.value);
-      ShooterButtonStart.whileHeld(new LaunchShooter(15800));
-
-      // Conveyor Forward
-      ConveyorForwardButton = new JoystickButton(OPERATOR, Button.kBumperRight.value);
-      ConveyorForwardButton.whileHeld(new MoveConveyor(-0.35));
-
-      // Conveyor Backward
-      // ConveyorBackwardButton = new JoystickButton(OPERATOR, Button.kBumperLeft.value);
-      // ConveyorBackwardButton.whileHeld(new MoveConveyor(-0.50));
-
-      // Cell Lift Forward
-      CellLiftForwardButton = new JoystickButton(OPERATOR, Button.kBumperLeft.value);
-      CellLiftForwardButton.whileHeld(new MoveCellLift(0.45));
+            DriveButtonA = new JoystickButton(CONTROLS, Button.kA.value);
+            DriveButtonA.whileHeld(new FullLaunchShooter(21000));
 
 
+            // Shooter 70%
+            ShooterButtonB = new JoystickButton(OPERATOR, Button.kB.value);
+            ShooterButtonB.whileHeld(new LaunchShooter(13800));
+            // ShooterButtonB.whileHeld(new MoveShooter(.7));
 
-      // Cell lift Backward
-      DriveButtonLBump = new JoystickButton(CONTROLS, Button.kBumperLeft.value);
-      DriveButtonLBump.whileHeld(new MoveCellLift(-0.25));
+            DriveButtonB = new JoystickButton(CONTROLS, Button.kB.value);
+            DriveButtonB.whileHeld(new LaunchShooter(13800));
 
-      DriveButtonRBump = new JoystickButton(CONTROLS, Button.kBumperRight.value);
-      DriveButtonRBump.whileHeld(new MoveConveyor(.25));
+            // Shooter 74%
+            ShooterButtonY = new JoystickButton(OPERATOR, Button.kY.value);
+            ShooterButtonY.whileHeld(new LaunchShooter(14875));
+            // ShooterButtonY.whileHeld(new MoveShooter(.74));
+
+            // Shooter 81%
+            ShooterButtonX = new JoystickButton(OPERATOR, Button.kX.value);
+            ShooterButtonX.whileHeld(new LaunchShooter(16075));
+            // ShooterButtonX.whileHeld(new MoveShooter(.81));
+
+            // Shooter velocity
+            ShooterButtonStart = new JoystickButton(OPERATOR, Button.kStart.value);
+            ShooterButtonStart.whileHeld(new LaunchShooter(15800));
+
+            // Conveyor Forward
+            ConveyorForwardButton = new JoystickButton(OPERATOR, Button.kBumperRight.value);
+            ConveyorForwardButton.whileHeld(new MoveConveyor(-0.35));
+
+            // Conveyor Backward
+            // ConveyorBackwardButton = new JoystickButton(OPERATOR, Button.kBumperLeft.value);
+            // ConveyorBackwardButton.whileHeld(new MoveConveyor(-0.50));
+
+            // Cell Lift Forward
+            CellLiftForwardButton = new JoystickButton(OPERATOR, Button.kBumperLeft.value);
+            CellLiftForwardButton.whileHeld(new MoveCellLift(0.45));
 
 
+            // Cell lift Backward
+            DriveButtonLBump = new JoystickButton(CONTROLS, Button.kBumperLeft.value);
+            DriveButtonLBump.whileHeld(new MoveCellLift(-0.25));
 
-      //Zero Gyro Command
-       new JoystickButton(CONTROLS, Button.kStart.value)
-         .whenPressed(() -> DRIVE.zeroGyro());
+            DriveButtonRBump = new JoystickButton(CONTROLS, Button.kBumperRight.value);
+            DriveButtonRBump.whileHeld(new MoveConveyor(.25));
 
-      //Zero Azimuths Command
-       // new JoystickButton(CONTROLS, Button.kB.value)
-       // .whenPressed(() -> DRIVE.zeroAzimuths());
-      
-      //Save Azimuth zeroes Command
-      // new JoystickButton(CONTROLS, Button.kX.value)
-      //  .whenPressed(() -> DRIVE.saveAzimuthPositions());
+
+            //Zero Gyro Command
+            new JoystickButton(CONTROLS, Button.kStart.value)
+                    .whenPressed(() -> DRIVE.zeroGyro());
+
+            //Zero Azimuths Command
+            // new JoystickButton(CONTROLS, Button.kB.value)
+            // .whenPressed(() -> DRIVE.zeroAzimuths());
+
+            //Save Azimuth zeroes Command
+            // new JoystickButton(CONTROLS, Button.kX.value)
+            //  .whenPressed(() -> DRIVE.saveAzimuthPositions());
+        }
+        command.setDefaultOption("Test", new testAuto());
+        command.addOption("Bounce", new bounce());
+        Shuffleboard.getTab(Constants.SBTabDriverDisplay)
+                .getLayout("Auto", BuiltInLayouts.kList).withPosition(Constants.autoColumn, 0).withSize(3, 1)
+                .add("Choose an Auto Mode", command).withWidget(BuiltInWidgets.kSplitButtonChooser);
     }
-    command.setDefaultOption("Test", new testAuto());
-    command.addOption("Bounce",new bounce());
-    Shuffleboard.getTab(Constants.SBTabDriverDisplay)
-    .getLayout("Auto", BuiltInLayouts.kList).withPosition(Constants.autoColumn, 0).withSize(3, 1)
-    .add("Choose an Auto Mode", command).withWidget(BuiltInWidgets.kSplitButtonChooser);
-  }
 
     /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
-  public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    return command.getSelected();
-  }
+     * Use this to pass the autonomous command to the main {@link Robot} class.
+     *
+     * @return the command to run in autonomous
+     */
+    public Command getAutonomousCommand() {
+        // An ExampleCommand will run in autonomous
+        return command.getSelected();
+    }
 }

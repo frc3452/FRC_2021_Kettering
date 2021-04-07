@@ -11,31 +11,34 @@ public class testAuto extends CommandGroupBase {
 
     public testAuto() {
         addCommands(
-           // new LaunchShooter(17000).withTimeout(7),
-           // new MoveCellLift(.75).withTimeout(5),
-           // new MoveConveyor(-.5).withTimeout(5)
-          new DriveTrajectory("Slalom", 0.0, false)
+                // new LaunchShooter(17000).withTimeout(7),
+                // new MoveCellLift(.75).withTimeout(5),
+                // new MoveConveyor(-.5).withTimeout(5)
+                new DriveTrajectory("Slalom", 0.0, false)
         );
     }
 
-    public void initialize(){
+    public void initialize() {
 
     }
 
     @Override
     public void addCommands(Command... commands) {
-        auto=parallel(commands);
-     }
-     public void execute(){
-        if(!done){
-           auto.schedule();
-           done=true;
+        auto = parallel(commands);
+    }
+
+    public void execute() {
+        if (!done) {
+            auto.schedule();
+            done = true;
         }
-     }
-     public boolean isFinished(){
+    }
+
+    public boolean isFinished() {
         return done;
-     }
-     public void end(boolean interrupted){
-        done=false;
-     }
+    }
+
+    public void end(boolean interrupted) {
+        done = false;
+    }
 }

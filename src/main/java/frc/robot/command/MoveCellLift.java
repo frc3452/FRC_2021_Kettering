@@ -6,19 +6,19 @@ import frc.robot.subsystem.CellLiftSubsystem;
 public class MoveCellLift extends CommandBase {
 
     private CellLiftSubsystem celllift;
-    private double speed; 
-    
+    private double speed;
+
     public MoveCellLift(double speed) {
         this.celllift = new CellLiftSubsystem();
-        this.speed = speed; 
+        this.speed = speed;
 
-        addRequirements(celllift); 
+        addRequirements(celllift);
     }
-    
+
     public void initialize() {
 
     }
-    
+
     public void execute() {
         celllift.Forward(speed);
     }

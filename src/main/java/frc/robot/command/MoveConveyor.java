@@ -6,19 +6,19 @@ import frc.robot.subsystem.ConveyorSubsystem;
 public class MoveConveyor extends CommandBase {
 
     private ConveyorSubsystem conveyor;
-    private double speed; 
-    
+    private double speed;
+
     public MoveConveyor(double speed) {
         this.conveyor = new ConveyorSubsystem();
-        this.speed = speed; 
+        this.speed = speed;
 
-        addRequirements(conveyor); 
+        addRequirements(conveyor);
     }
-    
+
     public void initialize() {
 
     }
-    
+
     public void execute() {
         conveyor.Forward(speed);
     }

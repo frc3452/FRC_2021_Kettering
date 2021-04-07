@@ -9,11 +9,11 @@ import frc.robot.subsystem.DriveSubsystem;
 import org.strykeforce.thirdcoast.swerve.SwerveDrive;
 import org.strykeforce.thirdcoast.swerve.SwerveDriveConfig;
 
-public class AzimuthTurn extends CommandBase{
+public class AzimuthTurn extends CommandBase {
     double targetAngle;
     boolean isFinished = false;
     double minCommand = 0.05;
-    double threshold = 3.0;   
+    double threshold = 3.0;
     double kp = 0.1;
 
     private static final DriveSubsystem DRIVE = RobotContainer.DRIVE;
@@ -24,35 +24,36 @@ public class AzimuthTurn extends CommandBase{
         this.targetAngle = degrees;
     }
 
-    @Override 
-    public void initialize(){
+    @Override
+    public void initialize() {
     }
 
     @Override
-    public void execute(){
+    public void execute() {
         double headingError = targetAngle - (gyro.getAngle() % 360);
         double steeringAdjust = 0.0;
 
-        if (headingError > threshold){
-            steeringAdjust = kp*headingError - minCommand;
-        } else if(headingError < -threshold){
-            steeringAdjust = kp*headingError + minCommand;
+        if (headingError > threshold) {
+            steeringAdjust = kp * headingError - minCommand;
+        } else if (headingError < -threshold) {
+            steeringAdjust = kp * headingError + minCommand;
         }
         DRIVE.drive(0, steeringAdjust, 0);
         // add swerve drive here 
 
-        if(headingError >= -threshold && headingError <= threshold){
+        if (headingError >= -threshold && headingError <= threshold) {
             isFinished = true;
         }
     }
+
     @Override
     public boolean isFinished() {
-      return isFinished;
+        return isFinished;
     }
-  
+
     // Called once after isFinished returns true
     @Override
     public void end(boolean interrupted) {
     }
-  
+
 }

@@ -6,23 +6,23 @@ import frc.robot.subsystem.ShooterSubsystem;
 public class LaunchShooter extends CommandBase {
 
     private ShooterSubsystem shooter;
-    private double speed; 
-    
+    private double speed;
+
     public LaunchShooter(double speed) {
         this.shooter = new ShooterSubsystem();
-        this.speed = speed; 
+        this.speed = speed;
 
-        addRequirements(shooter); 
+        addRequirements(shooter);
     }
-    
+
     public void initialize() {
 
     }
-    
+
     public void execute() {
         // System.out.println("Launch Shooter");
-                    shooter.Launch(speed);
-        }
+        shooter.Launch(speed);
+    }
 
     @Override
     public void end(boolean interrupted) {

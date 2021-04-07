@@ -11,35 +11,38 @@ public class bounce extends CommandGroupBase {
 
     public bounce() {
         addCommands(
-            new DriveDistance(0, 90, 0),
-            new DriveDistance(60, 90, 0),
-            new DriveDistance(0, 0, 0),
-            new DriveDistance(48, 0, 0),
-            new DriveDistance(156, 53, 0),
-            new DriveDistance(1, 87, 0),
-            new DriveDistance(1, 86, 0),
-            new DriveDistance(60,0,0)
+                new DriveDistance(0, 90, 0),
+                new DriveDistance(60, 90, 0),
+                new DriveDistance(0, 0, 0),
+                new DriveDistance(48, 0, 0),
+                new DriveDistance(156, 53, 0),
+                new DriveDistance(1, 87, 0),
+                new DriveDistance(1, 86, 0),
+                new DriveDistance(60, 0, 0)
         );
     }
 
-    public void initialize(){
+    public void initialize() {
 
     }
 
     @Override
     public void addCommands(Command... commands) {
-        auto=sequence(commands);
-     }
-     public void execute(){
-        if(!done){
-           auto.schedule();
-           done=true;
+        auto = sequence(commands);
+    }
+
+    public void execute() {
+        if (!done) {
+            auto.schedule();
+            done = true;
         }
-     }
-     public boolean isFinished(){
+    }
+
+    public boolean isFinished() {
         return done;
-     }
-     public void end(boolean interrupted){
-        done=false;
-     }
+    }
+
+    public void end(boolean interrupted) {
+        done = false;
+    }
 }
