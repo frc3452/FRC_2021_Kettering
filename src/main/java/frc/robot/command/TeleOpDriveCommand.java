@@ -21,8 +21,8 @@ public final class TeleOpDriveCommand extends CommandBase {
         double forward = deadband(controls.getRawAxis(1));
         double strafe = deadband(-controls.getRawAxis(0));
         double yaw = deadband(-controls.getRawAxis(4));
-    /* System.out.print("Teleop forward: ");
-    System.out.print(forward);
+    /* System.out.print("Teleop openLoop: ");
+    System.out.print(openLoop);
     System.out.print(" strafe: ");
     System.out.print(strafe);
     System.out.print(" yaw: ");

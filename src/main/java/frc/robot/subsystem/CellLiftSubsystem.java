@@ -13,15 +13,11 @@ public class CellLiftSubsystem extends SubsystemBase {
     public CellLiftSubsystem() {
         this.cellLiftLeft = new TalonSRX(Constants.CellLift.CELL_LIFT_PORT);
 
-        cellLiftLeft.setInverted(true);
+        cellLiftLeft.setInverted(false);
         // rightMotor.follow(leftMotor);
     }
 
-    public void forward(double power) {
-        cellLiftLeft.set(ControlMode.PercentOutput, -power);
-    }
-
-    public void backward(double power) {
+    public void openLoop(double power) {
         cellLiftLeft.set(ControlMode.PercentOutput, power);
     }
 

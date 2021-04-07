@@ -1,7 +1,6 @@
 package frc.robot.command;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
 import frc.robot.subsystem.ConveyorSubsystem;
 
 public class MoveConveyor extends CommandBase {
@@ -21,7 +20,7 @@ public class MoveConveyor extends CommandBase {
     }
 
     public void execute() {
-        conveyor.forward(speed);
+        conveyor.openLoop(speed);
     }
 
     @Override

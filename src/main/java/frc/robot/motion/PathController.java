@@ -110,7 +110,7 @@ public class PathController implements Runnable {
 
                 yaw = yawError * yawKp;
 
-                // if (forward > 1d || strafe > 1d) logger.warn("forward = {} strafe = {}", forward, strafe);
+                // if (openLoop > 1d || strafe > 1d) logger.warn("openLoop = {} strafe = {}", openLoop, strafe);
 
                 drive.drive(forward, strafe, yaw);
                 iteration++;

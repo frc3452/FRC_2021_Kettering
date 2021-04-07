@@ -16,7 +16,7 @@ public class ShooterSubsystem extends SubsystemBase {
         // this.rightMotor = new TalonFX(Constants.SHOOTER_RIGHT_PORT);
 
         // rightMotor.setInverted(true);
-        leftMotor.setInverted(true);
+        leftMotor.setInverted(false);
     }
 
     public void launch(double rpm) {
@@ -28,24 +28,17 @@ public class ShooterSubsystem extends SubsystemBase {
         // rightMotor.config_kD(0, .9);
         // System.out.print("Launching ");
         // System.out.println(rpm);
-        leftMotor.set(ControlMode.Velocity, -rpm);
+        leftMotor.set(ControlMode.Velocity, rpm);
         // rightMotor.set(ControlMode.Velocity, rpm);
         // System.out.println("Launched");
     }
 
-    public void forward(double power) {
-        leftMotor.set(ControlMode.PercentOutput, -power);
-        // rightMotor.set(ControlMode.PercentOutput, power);
-    }
-
-    public void backward(double power) {
+    public void openLoop(double power) {
         leftMotor.set(ControlMode.PercentOutput, power);
-        // rightMotor.set(ControlMode.PercentOutput, -power);
     }
 
     public void stop() {
         leftMotor.set(ControlMode.PercentOutput, 0);
-        // rightMotor.set(ControlMode.PercentOutput, 0);
     }
 
 }

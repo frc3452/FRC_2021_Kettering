@@ -82,7 +82,7 @@ public class RobotContainer {
             new JoystickButton(operator, Button.kStart.value)
                     .whileHeld(new LaunchShooter(shooter, 15800));
 
-            // Conveyor forward
+            // Conveyor openLoop
             new JoystickButton(operator, Button.kBumperRight.value)
                     .whileHeld(new MoveConveyor(conveyor, ConveyorSpeeds.FORWARDS));
 
@@ -90,7 +90,7 @@ public class RobotContainer {
             // ConveyorBackwardButton = new JoystickButton(OPERATOR, Button.kBumperLeft.value);
             // ConveyorBackwardButton.whileHeld(new MoveConveyor(-0.50));
 
-            // Cell Lift forward
+            // Cell Lift openLoop
             new JoystickButton(operator, Button.kBumperLeft.value)
                     .whileHeld(new MoveCellLift(cellLift, CellLiftSpeeds.MOVE_CELL_FORWARD));
 

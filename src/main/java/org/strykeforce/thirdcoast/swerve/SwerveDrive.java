@@ -13,7 +13,7 @@ import org.strykeforce.thirdcoast.talon.Errors;
  * Control a Third Coast swerve drive.
  *
  * <p>Wheels are a array numbered 0-3 from front to back, with even numbers on the left side when
- * facing forward.
+ * facing openLoop.
  *
  * <p>Derivation of inverse kinematic equations are from Ether's <a
  * href="https://www.chiefdelphi.com/media/papers/2426">Swerve Kinematics and Programming</a>.
@@ -118,7 +118,7 @@ public class SwerveDrive {
   /**
    * Drive the robot in given field-relative direction and with given rotation.
    *
-   * @param forward Y-axis movement, from -1.0 (reverse) to 1.0 (forward)
+   * @param forward Y-axis movement, from -1.0 (reverse) to 1.0 (openLoop)
    * @param strafe X-axis movement, from -1.0 (left) to 1.0 (right)
    * @param azimuth robot rotation, from -1.0 (CCW) to 1.0 (CW)
    */
