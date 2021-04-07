@@ -14,7 +14,7 @@ public class ConveyorSubsystem extends SubsystemBase {
         this.leftMotor = new TalonSRX(Constants.Conveyor.CONVEYOR_PORT);
         this.leftMotor.configFactoryDefault();
 
-        leftMotor.setInverted(false);
+        leftMotor.setInverted(true);
     }
 
     public void openLoop(double power) {

@@ -35,8 +35,8 @@ public final class Constants {
         public static final int CONVEYOR_PORT = 53;
 
         public static final class ConveyorSpeeds {
-            public static final double BACKWARDS = 0.25;
-            public static final double FORWARDS = -0.35;
+            public static final double FORWARDS = 0.35;
+            public static final double BACKWARDS = -0.25;
         }
     }
 
