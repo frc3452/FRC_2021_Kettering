@@ -1,4 +1,4 @@
-package frc.robot.Motion;
+package frc.robot.motion;
 
 import java.io.*;
 

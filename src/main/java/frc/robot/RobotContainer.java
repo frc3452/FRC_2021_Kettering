@@ -14,8 +14,8 @@ import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import frc.robot.command.Autons.bounce;
-import frc.robot.command.Autons.testAuto;
+import frc.robot.command.autons.Bounce;
+import frc.robot.command.autons.TestAuto;
 
 
 import frc.robot.subsystem.CellLiftSubsystem;
@@ -45,11 +45,11 @@ public class RobotContainer {
 
             // Display current speed multiplier
             Preferences prefs = Preferences.getInstance();
-            int DriveSpeed = prefs.getInt("MaxDriveSpeed", 1);
-            SmartDashboard.putNumber("Drive Speed", DriveSpeed);
+            int driveSpeed = prefs.getInt("MaxDriveSpeed", 1);
+            SmartDashboard.putNumber("Drive Speed", driveSpeed);
 
             //TELEMETRY.start();
-            DRIVE.stopall();
+            DRIVE.stopAll();
             DRIVE.setDefaultCommand(new TeleOpDriveCommand());
             // Shooter 100%
             new JoystickButton(OPERATOR, Button.kA.value)
@@ -82,20 +82,20 @@ public class RobotContainer {
             new JoystickButton(OPERATOR, Button.kStart.value)
                     .whileHeld(new LaunchShooter(15800));
 
-            // Conveyor Forward
+            // Conveyor forward
             new JoystickButton(OPERATOR, Button.kBumperRight.value)
                     .whileHeld(new MoveConveyor(ConveyorSpeeds.FORWARDS));
 
-            // Conveyor Backward
+            // Conveyor backward
             // ConveyorBackwardButton = new JoystickButton(OPERATOR, Button.kBumperLeft.value);
             // ConveyorBackwardButton.whileHeld(new MoveConveyor(-0.50));
 
-            // Cell Lift Forward
+            // Cell Lift forward
             new JoystickButton(OPERATOR, Button.kBumperLeft.value)
                     .whileHeld(new MoveCellLift(CellLiftSpeeds.MOVE_CELL_FORWARD));
 
 
-            // Cell lift Backward
+            // Cell lift backward
             new JoystickButton(CONTROLS, Button.kBumperLeft.value)
                     .whileHeld(new MoveCellLift(CellLiftSpeeds.MOVE_CELL_BACKWARDS));
 
@@ -115,8 +115,8 @@ public class RobotContainer {
             // new JoystickButton(CONTROLS, Button.kX.value)
             //  .whenPressed(() -> DRIVE.saveAzimuthPositions());
         }
-        command.setDefaultOption("Test", new testAuto());
-        command.addOption("Bounce", new bounce());
+        command.setDefaultOption("Test", new TestAuto());
+        command.addOption("Bounce", new Bounce());
         Shuffleboard.getTab(Constants.SBTabDriverDisplay)
                 .getLayout("Auto", BuiltInLayouts.kList).withPosition(Constants.autoColumn, 0).withSize(3, 1)
                 .add("Choose an Auto Mode", command).withWidget(BuiltInWidgets.kSplitButtonChooser);

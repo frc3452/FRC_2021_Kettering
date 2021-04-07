@@ -19,11 +19,11 @@ public class ConveyorSubsystem extends SubsystemBase {
         // rightMotor.follow(leftMotor);
     }
 
-    public void Forward(double power) {
+    public void forward(double power) {
         leftMotor.set(ControlMode.PercentOutput, -power);
     }
 
-    public void Backward(double power) {
+    public void backward(double power) {
         leftMotor.set(ControlMode.PercentOutput, power);
     }
 

@@ -21,8 +21,8 @@ public class LaunchShooter extends CommandBase {
     }
 
     public void execute() {
-        // System.out.println("Launch Shooter");
-        shooter.Launch(speed);
+        // System.out.println("launch Shooter");
+        shooter.launch(speed);
     }
 
     @Override

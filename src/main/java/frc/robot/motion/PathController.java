@@ -1,9 +1,8 @@
-package frc.robot.Motion;
+package frc.robot.motion;
 
 import edu.wpi.first.wpilibj.Notifier;
 import frc.robot.RobotContainer;
 import frc.robot.subsystem.DriveSubsystem;
-import frc.robot.Motion.Setpoint;
 
 import java.io.File;
 

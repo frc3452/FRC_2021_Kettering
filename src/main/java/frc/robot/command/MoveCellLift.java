@@ -6,14 +6,14 @@ import frc.robot.subsystem.CellLiftSubsystem;
 
 public class MoveCellLift extends CommandBase {
 
-    private CellLiftSubsystem celllift;
+    private CellLiftSubsystem cellLift;
     private double speed;
 
     public MoveCellLift(double speed) {
-        this.celllift = RobotContainer.CELL_LIFT;
+        this.cellLift = RobotContainer.CELL_LIFT;
         this.speed = speed;
 
-        addRequirements(celllift);
+        addRequirements(cellLift);
     }
 
     public void initialize() {
@@ -21,12 +21,12 @@ public class MoveCellLift extends CommandBase {
     }
 
     public void execute() {
-        celllift.Forward(speed);
+        cellLift.forward(speed);
     }
 
     @Override
     public void end(boolean interrupted) {
-        celllift.stop();
+        cellLift.stop();
     }
 
     @Override

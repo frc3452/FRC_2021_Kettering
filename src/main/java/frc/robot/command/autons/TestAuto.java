@@ -1,13 +1,11 @@
-package frc.robot.command.Autons;
+package frc.robot.command.autons;
 
-import edu.wpi.first.wpilibj2.command.CommandGroupBase;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.command.Movements.DriveTrajectory;
+import frc.robot.command.movements.DriveTrajectory;
 
-public class testAuto extends SequentialCommandGroup {
+public class TestAuto extends SequentialCommandGroup {
 
-    public testAuto() {
+    public TestAuto() {
         addCommands(
                 new DriveTrajectory("Slalom", 0.0, false)
         );

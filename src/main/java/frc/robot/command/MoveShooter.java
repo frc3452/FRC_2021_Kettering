@@ -21,7 +21,7 @@ public class MoveShooter extends CommandBase {
     }
 
     public void execute() {
-        shooter.Forward(speed);
+        shooter.forward(speed);
     }
 
     @Override

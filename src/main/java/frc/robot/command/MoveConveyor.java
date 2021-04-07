@@ -21,7 +21,7 @@ public class MoveConveyor extends CommandBase {
     }
 
     public void execute() {
-        conveyor.Forward(speed);
+        conveyor.forward(speed);
     }
 
     @Override

@@ -1,15 +1,10 @@
-package frc.robot.command.Movements;
+package frc.robot.command.movements;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.subsystem.DriveSubsystem;
-import org.strykeforce.thirdcoast.swerve.SwerveDrive;
 import org.strykeforce.thirdcoast.swerve.SwerveDriveConfig;
 import com.kauailabs.navx.frc.AHRS;
-
-import java.util.concurrent.TimeUnit;
 
 public class DriveDistance extends CommandBase {
 
@@ -66,7 +61,7 @@ public class DriveDistance extends CommandBase {
             motorSpeed = 1;
             DRIVE.drive(motorSpeed, azimuthAngle, yaw);
             if (t >= time) {
-                DRIVE.stopall();
+                DRIVE.stopAll();
             }
 
             try {

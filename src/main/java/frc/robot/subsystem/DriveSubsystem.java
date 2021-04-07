@@ -3,9 +3,8 @@ package frc.robot.subsystem;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.RobotContainer;
 import org.strykeforce.thirdcoast.swerve.SwerveDrive.DriveMode;
-import frc.robot.Motion.PathController;
+import frc.robot.motion.PathController;
 
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
@@ -67,7 +66,7 @@ public class DriveSubsystem extends SubsystemBase {
         swerve.saveAzimuthPositions();
     }
 
-    public void stopall() {
+    public void stopAll() {
         swerve.stop();
     }
 

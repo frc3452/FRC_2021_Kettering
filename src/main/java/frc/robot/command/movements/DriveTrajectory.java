@@ -1,4 +1,4 @@
-package frc.robot.command.Movements;
+package frc.robot.command.movements;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystem.DriveSubsystem;

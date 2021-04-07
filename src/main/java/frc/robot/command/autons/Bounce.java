@@ -1,11 +1,11 @@
-package frc.robot.command.Autons;
+package frc.robot.command.autons;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.command.Movements.DriveDistance;
+import frc.robot.command.movements.DriveDistance;
 
-public class bounce extends SequentialCommandGroup {
+public class Bounce extends SequentialCommandGroup {
 
-    public bounce() {
+    public Bounce() {
         addCommands(
                 new DriveDistance(0, 90, 0),
                 new DriveDistance(60, 90, 0),
