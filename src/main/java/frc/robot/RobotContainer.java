@@ -4,7 +4,8 @@ import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj.SPI;
+import frc.robot.Constants.CellLift.CellLiftSpeeds;
+import frc.robot.Constants.Conveyor.ConveyorSpeeds;
 import frc.robot.command.*;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 import edu.wpi.first.wpilibj.Preferences;
@@ -15,7 +16,6 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.command.Autons.bounce;
 import frc.robot.command.Autons.testAuto;
-import com.kauailabs.navx.frc.AHRS;
 
 
 import frc.robot.subsystem.DriveSubsystem;
@@ -98,7 +98,7 @@ public class RobotContainer {
 
             // Conveyor Forward
             ConveyorForwardButton = new JoystickButton(OPERATOR, Button.kBumperRight.value);
-            ConveyorForwardButton.whileHeld(new MoveConveyor(-0.35));
+            ConveyorForwardButton.whileHeld(new MoveConveyor(ConveyorSpeeds.FORWARDS));
 
             // Conveyor Backward
             // ConveyorBackwardButton = new JoystickButton(OPERATOR, Button.kBumperLeft.value);
@@ -106,15 +106,15 @@ public class RobotContainer {
 
             // Cell Lift Forward
             CellLiftForwardButton = new JoystickButton(OPERATOR, Button.kBumperLeft.value);
-            CellLiftForwardButton.whileHeld(new MoveCellLift(0.45));
+            CellLiftForwardButton.whileHeld(new MoveCellLift(CellLiftSpeeds.MOVE_CELL_FORWARD));
 
 
             // Cell lift Backward
             DriveButtonLBump = new JoystickButton(CONTROLS, Button.kBumperLeft.value);
-            DriveButtonLBump.whileHeld(new MoveCellLift(-0.25));
+            DriveButtonLBump.whileHeld(new MoveCellLift(CellLiftSpeeds.MOVE_CELL_BACKWARDS));
 
             DriveButtonRBump = new JoystickButton(CONTROLS, Button.kBumperRight.value);
-            DriveButtonRBump.whileHeld(new MoveConveyor(.25));
+            DriveButtonRBump.whileHeld(new MoveConveyor(ConveyorSpeeds.BACKWARDS));
 
 
             //Zero Gyro Command

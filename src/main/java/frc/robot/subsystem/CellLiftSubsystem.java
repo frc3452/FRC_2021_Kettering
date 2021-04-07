@@ -12,7 +12,7 @@ public class CellLiftSubsystem extends SubsystemBase {
     // private TalonSRX conveyorMotor;
 
     public CellLiftSubsystem() {
-        this.cellliftleftMotor = new TalonSRX(Constants.CELL_LIFT_PORT);
+        this.cellliftleftMotor = new TalonSRX(Constants.CellLift.CELL_LIFT_PORT);
         // this.conveyorMotor = new TalonSRX(Constants.CELL_LIFT_PORT);
 
         cellliftleftMotor.setInverted(true);

@@ -1,16 +1,15 @@
 package frc.robot.command;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.CommandGroupBase;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.Constants.CellLift.CellLiftSpeeds;
+import frc.robot.Constants.Conveyor.ConveyorSpeeds;
 
 public class FullLaunchShooter extends ParallelCommandGroup {
     public FullLaunchShooter(double speed) {
         addCommands(
                 new LaunchShooter(speed).withTimeout(5),
-                new MoveCellLift(.45).withTimeout(3),
-                new MoveConveyor(-.35).withTimeout(3)
+                new MoveCellLift(CellLiftSpeeds.MOVE_CELL_FORWARD).withTimeout(3),
+                new MoveConveyor(ConveyorSpeeds.FORWARDS).withTimeout(3)
         );
     }
 
