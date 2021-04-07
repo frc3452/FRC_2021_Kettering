@@ -18,6 +18,7 @@ import frc.robot.command.Autons.bounce;
 import frc.robot.command.Autons.testAuto;
 
 
+import frc.robot.subsystem.CellLiftSubsystem;
 import frc.robot.subsystem.DriveSubsystem;
 import frc.robot.subsystem.ShooterSubsystem;
 import frc.robot.subsystem.ConveyorSubsystem;
@@ -32,6 +33,7 @@ public class RobotContainer {
     public static XboxController OPERATOR = new XboxController(1);
     public static ShooterSubsystem SHOOTER = new ShooterSubsystem();
     public static ConveyorSubsystem CONVEYOR = new ConveyorSubsystem();
+    public static CellLiftSubsystem CELL_LIFT = new CellLiftSubsystem();
 
     private SendableChooser<Command> command = new SendableChooser<>();
 

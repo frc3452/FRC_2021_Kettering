@@ -1,6 +1,7 @@
 package frc.robot.command;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 import frc.robot.subsystem.ShooterSubsystem;
 
 public class MoveShooter extends CommandBase {
@@ -9,7 +10,7 @@ public class MoveShooter extends CommandBase {
     private double speed;
 
     public MoveShooter(double speed) {
-        this.shooter = new ShooterSubsystem();
+        this.shooter = RobotContainer.SHOOTER;
         this.speed = speed;
 
         addRequirements(shooter);
