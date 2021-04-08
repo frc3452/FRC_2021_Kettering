@@ -2,6 +2,7 @@ package frc.robot.command;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Util;
 import frc.robot.subsystem.DriveSubsystem;
 
 public final class TeleOpDriveCommand extends CommandBase {
@@ -18,19 +19,14 @@ public final class TeleOpDriveCommand extends CommandBase {
 
     @Override
     public void execute() {
-        double forward = deadband(controls.getRawAxis(1));
-        double strafe = deadband(-controls.getRawAxis(0));
-        double yaw = deadband(-controls.getRawAxis(4));
-    /* System.out.print("Teleop openLoop: ");
-    System.out.print(openLoop);
-    System.out.print(" strafe: ");
-    System.out.print(strafe);
-    System.out.print(" yaw: ");
-    System.out.println(yaw); */
+        double forward = Util.applyDeadband(controls.getRawAxis(1), DEADBAND);
+        double strafe = Util.applyDeadband(-controls.getRawAxis(0), DEADBAND);
+        double yaw = Util.applyDeadband(-controls.getRawAxis(4), DEADBAND);
         if (forward == 0 && strafe == 0 && yaw == 0) {
             drive.stopAll();
+        } else {
+            drive.drive(forward, strafe, yaw);
         }
-        drive.drive(forward, strafe, yaw);
     }
 
     @Override
@@ -38,8 +34,4 @@ public final class TeleOpDriveCommand extends CommandBase {
         drive.drive(0.0, 0.0, 0.0);
     }
 
-    private double deadband(double value) {
-        if (Math.abs(value) < DEADBAND) return 0.0;
-        return value;
-    }
 }
