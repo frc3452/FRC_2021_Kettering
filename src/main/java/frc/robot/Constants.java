@@ -25,8 +25,18 @@ public final class Constants {
         public static final int CELL_LIFT_PORT = 54;
 
         public static final class CellLiftSpeeds {
-            public static final double MOVE_CELL_FORWARD = 0.45;
+            public static final double MOVE_CELL_FORWARD = 0.60;
             public static final double MOVE_CELL_BACKWARDS = -0.25;
+        }
+    }
+
+    public static final class Intake {
+        public static final int INTAKE_PORT = 55;
+
+        public static final class IntakeSpeeds {
+            public static final double FORWARDS = -0.65;
+            public static final double BACKWARDS = -.25;
+            public static final double RELEASE = .35;
         }
     }
 
@@ -35,7 +45,7 @@ public final class Constants {
         public static final int CONVEYOR_PORT = 53;
 
         public static final class ConveyorSpeeds {
-            public static final double FORWARDS = 0.35;
+            public static final double FORWARDS = 0.55;
             public static final double BACKWARDS = -0.25;
         }
     }

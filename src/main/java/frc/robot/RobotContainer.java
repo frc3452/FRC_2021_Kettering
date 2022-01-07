@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.CellLift.CellLiftSpeeds;
 import frc.robot.Constants.Conveyor.ConveyorSpeeds;
+import frc.robot.Constants.Intake.IntakeSpeeds;
 import frc.robot.command.*;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 import edu.wpi.first.wpilibj.Preferences;
@@ -22,6 +23,7 @@ import frc.robot.subsystem.CellLiftSubsystem;
 import frc.robot.subsystem.DriveSubsystem;
 import frc.robot.subsystem.ShooterSubsystem;
 import frc.robot.subsystem.ConveyorSubsystem;
+import frc.robot.subsystem.IntakeSubsystem;
 //import org.strykeforce.thirdcoast.telemetry.TelemetryController;
 //import org.strykeforce.thirdcoast.telemetry.TelemetryService;
 
@@ -34,6 +36,7 @@ public class RobotContainer {
     private final ShooterSubsystem shooter = new ShooterSubsystem();
     private final ConveyorSubsystem conveyor = new ConveyorSubsystem();
     private final CellLiftSubsystem cellLift = new CellLiftSubsystem();
+    private final IntakeSubsystem intake = new IntakeSubsystem();
 
     private SendableChooser<Command> command = new SendableChooser<>();
 
@@ -102,18 +105,23 @@ public class RobotContainer {
             new JoystickButton(controls, Button.kBumperRight.value)
                     .whileHeld(new MoveConveyor(conveyor, ConveyorSpeeds.BACKWARDS));
 
+            new JoystickButton(controls, Button.kX.value)
+                    .whileHeld(new MoveIntake(intake, IntakeSpeeds.FORWARDS));
+
+            new JoystickButton(controls, Button.kY.value)
+                    .whileHeld(new MoveIntake(intake, IntakeSpeeds.RELEASE));
 
             //Zero Gyro Command
-            new JoystickButton(controls, Button.kStart.value)
-                    .whenPressed(() -> drive.zeroGyro());
+           // new JoystickButton(controls, Button.kStart.value)
+             //       .whenPressed(() -> drive.zeroGyro());
 
             //Zero Azimuths Command
-            // new JoystickButton(CONTROLS, Button.kB.value)
-            // .whenPressed(() -> DRIVE.zeroAzimuths());
+            //    new JoystickButton(operator, Button.kStart.value)
+            // .whenPressed(() -> drive.zeroAzimuths());
 
             //Save Azimuth zeroes Command
-            // new JoystickButton(CONTROLS, Button.kX.value)
-            //  .whenPressed(() -> DRIVE.saveAzimuthPositions());
+            //new JoystickButton(controls, Button.kStart.value)
+           //  .whenPressed(() -> drive.saveAzimuthPositions());
         }
         command.setDefaultOption("Test", new TestAuto(drive));
         command.addOption("Bounce", new Bounce(drive));
